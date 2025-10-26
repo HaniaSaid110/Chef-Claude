@@ -2,6 +2,10 @@
 
 Chef Claude is a small React + Vite app that suggests recipes based on ingredients you have. It uses an external recipe API and lets users save favorite recipes.
 
+## Live Demo
+
+https://haniasaid110.github.io/Chef-Claude/
+
 ## Features
 
 - Enter ingredients and request a recipe
