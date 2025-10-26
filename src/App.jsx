@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <FavoritesProvider>
-        <BrowserRouter>
+        <HashRouter>
           <div className="flex flex-col h-full pt-20">
             <Navbar />
             <div className="flex flex-col grow">
@@ -27,7 +27,7 @@ function App() {
               <Footer />
             </div>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </FavoritesProvider>
     </>
   );
