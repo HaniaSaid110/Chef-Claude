@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import foodBg from "../assets/images/food-bg.png";
+import foodBg from "../assets/images/food-bg.jpg";
 import FieldsetCard from "../components/FieldsetCard";
 import { RiRobot3Fill } from "react-icons/ri";
 import { BiSolidDish } from "react-icons/bi";
