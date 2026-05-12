@@ -51,7 +51,7 @@ export default function Home() {
               </p>
               <Link
                 to="/claude-recipe"
-                className="inline-flex items-center gap-2 font-semibold text-[0.9rem] px-[1.4rem] py-[0.6rem] rounded-xl cursor-pointer transition-all duration-[180ms] bg-transparent text-white border-2 border-white hover:bg-white hover:text-green-800 hover:-translate-y-px self-start mt-2"
+                className="inline-flex items-center gap-2 font-semibold text-[0.9rem] px-[1.4rem] py-[0.6rem] rounded-xl cursor-pointer transition-all duration-[180ms] bg-transparent text-white border-2 border-primary hover:bg-white hover:text-green-800 hover:-translate-y-px self-start mt-2"
               >
                 Give Me a Recipe! <HiArrowRight />
               </Link>
