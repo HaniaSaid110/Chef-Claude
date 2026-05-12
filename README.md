@@ -2,6 +2,10 @@
 
 Chef Claude is a small React + Vite app that suggests recipes based on ingredients you have. It uses an external recipe API and lets users save favorite recipes.
 
+## Live Demo
+
+https://haniasaid110.github.io/Chef-Claude/
+
 ## Features
 
 - Enter ingredients and request a recipe
@@ -73,11 +77,3 @@ Access it in code with `import.meta.env.VITE_API_NINJAS_KEY`.
 - Use a `loading` boolean state around fetch requests to show a loader.
 - Store favorites in a global store (Context or Zustand). Zustand removes the need for a Provider and offers lightweight selectors.
 - For modals, store the selected recipe object in state and render a centered overlay when it’s non-null.
-
-## Contributing
-
-Open an issue or submit a PR. Keep changes focused and add brief descriptions.
-
-## License
-
-MIT
