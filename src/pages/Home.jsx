@@ -36,7 +36,7 @@ export default function Home() {
           className="relative bg-center bg-cover bg-no-repeat rounded-3xl overflow-hidden"
           style={{ backgroundImage: `url(${foodBg})` }}
         >
-          <div className="bg-[linear-gradient(135deg,oklch(0.1_0.01_150/0.82)_0%,oklch(0.18_0.12_150/0.60)_100%)] rounded-3xl px-8 py-20 md:py-36 grid grid-cols-2">
+          <div className="bg-[linear-gradient(135deg,oklch(0.1_0.01_150/0.60)_0%,oklch(0.18_0.12_150/0.60)_100%)] rounded-3xl px-8 py-20 md:py-36 grid grid-cols-2">
             <div className="col-span-2 md:col-span-1 flex flex-col gap-5 text-white">
               <span className="inline-block text-xs font-semibold tracking-widest uppercase bg-white/10 backdrop-blur px-3 py-1 rounded-full w-fit">
                 AI-Powered Chef
