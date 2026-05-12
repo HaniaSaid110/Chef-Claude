@@ -3,7 +3,7 @@
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────── */
 @theme {
-  --color-primary:       oklch(0.68 0.14 150);
+  --color-primary:       oklch(0.68 0.14 149.64);
   --color-primary-dark:  oklch(0.55 0.14 150);
   --color-secondary:     oklch(1 0 0);
   --color-surface:       oklch(0.98 0.005 150);
