@@ -51,7 +51,7 @@ export default function Navbar() {
           className="flex flex-row items-center gap-2"
           onClick={closeMenu}
         >
-          <div className="w-12 md:w-14">
+          <div className="w-12 md:w-18">
             <img src={chefRobot} alt="Chef Claude logo" />
           </div>
           <span className="font-press-start text-white text-sm md:text-base tracking-tight leading-tight">
