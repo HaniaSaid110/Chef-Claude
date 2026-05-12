@@ -1,106 +1,124 @@
 import React from "react";
 import RandomRecipe from "../components/RandomRecipe";
 import { useFavorites } from "../hooks/useFavorites";
+import { FiPlus } from "react-icons/fi";
+import { MdOutlineClose } from "react-icons/md";
+import { GiCookingPot } from "react-icons/gi";
 
 export default function ClaudeRecipe() {
   const [ingredients, setIngredients] = React.useState([]);
 
   function addIngredient(formData) {
-    const newIngredient = formData.get(`ingredient`);
-    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
-    // console.log(ingredients);
+    const newIngredient = formData.get("ingredient").trim();
+    if (newIngredient) {
+      setIngredients((prev) => [...prev, newIngredient]);
+    }
   }
 
-  function handleRemoveIngredient(ingredienttoRemove) {
-    setIngredients((prevIngredients) =>
-      prevIngredients.filter(function (item) {
-        return item !== ingredienttoRemove;
-      })
+  function handleRemoveIngredient(ingredientToRemove) {
+    setIngredients((prev) =>
+      prev.filter((item) => item !== ingredientToRemove),
     );
   }
+
   const ingredientsElements = ingredients.map(function (ingredient, index) {
     return (
-      <>
-        <div
-          className="flex flex-row justify-between w-sm md:w-md p-2 border-b border-b-primary"
-          key={index}
+      <div
+        key={index}
+        className="flex items-center justify-between py-2.5 px-4 bg-white border border-border rounded-xl w-[min(28rem,90vw)] shadow-[0_1px_4px_oklch(0_0_0/0.05)]"
+      >
+        <li className="font-medium text-sm list-none">{ingredient}</li>
+        <button
+          className="text-xs font-semibold text-red-400 hover:text-red-600 active:text-red-800 transition-colors cursor-pointer flex items-center gap-1"
+          onClick={() => handleRemoveIngredient(ingredient)}
         >
-          <li>{ingredient}</li>
-          <button
-            className="bg-red-400 hover:bg-red-600 active:bg-red-800 rounded-md cursor-pointer px-2 py-1 text-secondary"
-            onClick={() => handleRemoveIngredient(ingredient)}
-          >
-            Remove
-          </button>
-        </div>
-      </>
+          <MdOutlineClose className="text-base" /> Remove
+        </button>
+      </div>
     );
   });
 
   const [getRecipe, setGetRecipe] = React.useState(0);
 
   function handleGetRecipe() {
-    setGetRecipe((prevGetRecipe) => prevGetRecipe + 1);
+    setGetRecipe((prev) => prev + 1);
   }
 
   const { addFavorite } = useFavorites();
+  const ready = ingredientsElements.length >= 3;
 
   return (
-    <section className="flex flex-col items-center">
-      <div className="flex flex-col items-center">
-        <h2 className="text-lg md:text-3xl font-semibold p-8">How it works:</h2>
-        <ul className="list-decimal list-inside text-lg text-center">
-          <li>Write down your available ingredients</li>
-          <li>You must list more than 3 ingredients</li>
-          <li>
-            Click Get a Recipe to get a recipe of Chef Claude's recommendations
-          </li>
-        </ul>
+    <section className="flex flex-col items-center pb-12">
+      {/* ── Page header ── */}
+      <div className="w-full bg-white border-b border-gray-100 py-10 px-4 flex flex-col items-center gap-2 mb-6">
+        <GiCookingPot className="text-5xl text-primary mb-1" />
+        <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight">
+          Claude Recipe
+        </h1>
+        <p className="text-sm text-gray-400 font-medium">
+          Add your ingredients below and let Claude do the magic.
+        </p>
       </div>
-      <form action={addIngredient} className="flex flex-row gap-4 p-6">
+
+      {/* ── Steps ── */}
+      <ol className="list-none flex flex-col md:flex-row gap-3 md:gap-6 text-sm text-gray-500 mb-8 px-4">
+        {[
+          `List your available ingredients`,
+          `Add at least 3`,
+          `Hit "Get a Recipe" and enjoy!`,
+        ].map((step, i) => (
+          <li key={i} className="flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+              {i + 1}
+            </span>
+            {step}
+          </li>
+        ))}
+      </ol>
+
+      {/* ── Input form ── */}
+      <form action={addIngredient} className="flex flex-row gap-3 px-4 mb-6">
         <input
           type="text"
           name="ingredient"
-          placeholder="e.g. chicken"
-          className="px-5 py-2 rounded-lg border border-primary focus:outline-none"
+          placeholder="e.g. chicken, garlic…"
+          className="px-4 py-2.5 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm w-56 md:w-72 transition"
         />
-        <button className="cursor-pointer rounded-lg px-4 py-2 bg-primary text-secondary hover:bg-green-600 active:bg-green-800">
-          + Add Ingredient
+        <button className="inline-flex items-center gap-1.5 font-semibold text-[0.9rem] px-[1.4rem] py-[0.6rem] rounded-xl cursor-pointer transition-all duration-[180ms] bg-primary text-white hover:bg-primary-dark hover:-translate-y-px active:bg-[oklch(0.45_0.14_150)]">
+          <FiPlus className="text-base" /> Add
         </button>
       </form>
-      <ul className="w-full flex flex-col items-center">
-        {ingredientsElements}
-      </ul>
-      {ingredientsElements.length >= 3 && (
-        <div>
-          <div className="flex flex-col p-8 gap-6">
-            <div className="flex flex-col items-center">
-              <h2>Ready for a Recipe?</h2>
-              <p>Generate a Recipe from your list of ingredients.</p>
+
+      {/* ── Ingredient list ── */}
+      {ingredients.length > 0 && (
+        <ul className="flex flex-col items-center gap-2 w-full px-4 mb-6">
+          {ingredientsElements}
+        </ul>
+      )}
+
+      {/* ── CTA ── */}
+      {ready && (
+        <div className="w-full flex flex-col items-center gap-4 px-4">
+          <div className="text-center">
+            <h2 className="text-lg font-bold">Ready for a recipe?</h2>
+            <p className="text-sm text-gray-400">
+              Claude will pick something delicious from your list.
+            </p>
+          </div>
+          <button
+            onClick={handleGetRecipe}
+            className="inline-flex items-center gap-2 font-semibold text-base px-8 py-3 rounded-xl cursor-pointer transition-all duration-[180ms] bg-primary text-white hover:bg-primary-dark hover:-translate-y-px active:bg-[oklch(0.45_0.14_150)]"
+          >
+            <GiCookingPot className="text-lg" /> Get a Recipe
+          </button>
+
+          {getRecipe >= 1 && (
+            <div className="w-full max-w-3xl px-2">
+              <RandomRecipe recipe={getRecipe} onFavorite={addFavorite} />
             </div>
-            <button
-              onClick={handleGetRecipe}
-              className="cursor-pointer rounded-lg self-center px-4 py-2 bg-primary text-secondary hover:bg-green-600 active:bg-green-800"
-            >
-              Get a Recipe
-            </button>
-          </div>
-          <div>
-            {getRecipe >= 1 ? (
-              <div className="p-3">
-                <RandomRecipe recipe={getRecipe} onFavorite={addFavorite} />
-              </div>
-            ) : null}
-          </div>
+          )}
         </div>
       )}
     </section>
   );
 }
-
-// <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-//   <h1 className="text-4xl font-bold mb-6">Claude Recipe Page</h1>
-//   <p className="text-lg text-gray-700">
-//     This is where the Claude recipe content will go.
-//   </p>
-// </div>
